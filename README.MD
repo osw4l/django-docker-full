@@ -61,6 +61,7 @@ if you want to disable the register and the confirmation after register you have
 [http://localhost:4500/admin/](http://localhost:4500/admin/)
 
 Go to main and then go to setup
+
 ![enter image description here](https://i.imgur.com/Q70P0FB.png)
 
 ![enter image description here](https://i.imgur.com/qbgi0dK.png)
