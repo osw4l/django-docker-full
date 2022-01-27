@@ -1,5 +1,5 @@
   
-# Django Docker Full 
+# Django Docker Full - by osw4l
 
 ![enter image description here](https://i.imgur.com/rsEw4yc.png)
 
@@ -45,6 +45,33 @@ and more pretty stuff like
  - Natural structure, **like you weren't using docker**    
 - Production deploy steps [click here](https://gist.github.com/osw4l/cbfbfb3f7a7f42ab31fa5083b358f316)    
 
+**Django Rest Framework Swagger**
+the project contains its own auth backend with register, login and reset password
+
+![enter image description here](https://i.imgur.com/n2o2Fqo.png)
+
+Each endpoint contains its own serializer and swagger collection
+![enter image description here](https://i.imgur.com/Ynqm69w.png)
+
+![enter image description here](https://i.imgur.com/BlnGLVU.png)
+
+if you want to disable the register and the confirmation after register you have to go to setup in the admin
+
+[http://localhost:4500/admin/](http://localhost:4500/admin/)
+
+Go to main and then go to setup
+![enter image description here](https://i.imgur.com/Q70P0FB.png)
+
+![enter image description here](https://i.imgur.com/qbgi0dK.png)
+Now go to the detail
+
+I'll disabled the register for now
+![enter image description here](https://i.imgur.com/WQo5C4v.png)
+
+**Then if i try to register in the register endpoint this gonna be the result**
+
+![enter image description here](https://i.imgur.com/1H8Zxum.png)
+
 **Django Google Maps Widget**
 
 ![enter image description here](https://cloud.githubusercontent.com/assets/1518272/26807500/ad0af4ea-4a4e-11e7-87d6-632f39e438f7.gif)
@@ -58,6 +85,7 @@ and more pretty stuff like
 **Django Admin custom themes by** [django-admin-interface](https://github.com/fabiocaccamo/django-admin-interface)    
 
 ![enter image description here](https://user-images.githubusercontent.com/1035294/35631521-64b0cab8-06a4-11e8-8f57-c04fdfbb7e8b.gif)
+
 
 **Custom Commands**
 
@@ -176,3 +204,5 @@ Please, DON'T UPDATE THE DEPENDENCIES ! **unless necessary**
  if you wanna deploy this project in production, [go to here](https://gist.github.com/osw4l/cbfbfb3f7a7f42ab31fa5083b358f316)    
     
 **Thanks for using my project, if you need something else, feel you free to contact me** **ioswxd@gmail.com**
+
+## Enjoy the project 🥳 🟡 🔵 💛 💙 💟
