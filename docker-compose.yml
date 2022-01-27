@@ -1,0 +1,120 @@
+version: '3.7'
+
+networks:
+  webnet:
+  redisnet:
+  db_network:
+  elastic_network:
+
+volumes:
+  postgres_data:
+  redisdata:
+
+services:
+  elastic:
+    image: elasticsearch:7.8.1
+    volumes:
+      - ./setup/docker/elastic:/usr/share/elasticsearch/data
+    command: ["elasticsearch", "-Elogger.level=WARN"]
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+    ports:
+      - '9920:9200'
+    networks:
+      - elastic_network
+    logging:
+      driver: 'none'
+
+  backend:
+    container_name: django_osw4l_full
+    restart: on-failure
+    build: .
+    env_file: .env
+    command:  uwsgi --socket=:8002 --module=project.wsgi:application --py-autoreload=1
+    volumes:
+      - .:/app
+      - ./static:/app/static
+    depends_on:
+      - database
+      - elastic
+    networks:
+      - webnet
+      - redisnet
+      - db_network
+      - elastic_network
+
+  websockets:
+    restart: on-failure
+    build: .
+    command: daphne -b 0.0.0.0 -p 8003 project.asgi:application
+    volumes:
+      - .:/app
+    depends_on:
+      - database
+      - redis
+    networks:
+      - webnet
+      - redisnet
+      - db_network
+
+  redis:
+    image: redis:latest
+    restart: always
+    volumes:
+      - ./setup/docker/redis-data:/data
+    networks:
+      - redisnet
+    command: redis-server
+
+  database:
+    image: kartoza/postgis:12.0
+    volumes:
+      - ./setup/docker/postgres:/var/lib/postgresql/12/main
+    env_file: .env
+    ports:
+      - '6200:5432'
+    restart: on-failure
+    networks:
+      - db_network
+
+  nginx:
+    image: nginx:1.15.0
+    depends_on:
+      - websockets
+      - backend
+    volumes:
+      - ./setup/nginx/full:/etc/nginx/conf.d
+      - ./static:/app/static
+    networks:
+      - webnet
+    ports:
+      - '4500:80'
+    logging:
+      driver: 'none'
+
+  worker:
+    build: .
+    volumes:
+      - .:/app
+    env_file: .env
+    restart: on-failure
+    command: celery -A project worker --concurrency=10 -l info
+    networks:
+      - redisnet
+      - db_network
+      - elastic_network
+
+  beat:
+    build: .
+    volumes:
+      - .:/app
+    env_file: .env
+    restart: on-failure
+    command: celery -A project beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile=/home/app/celery.pid
+    networks:
+      - redisnet
+      - db_network
+    logging:
+      driver: 'none'

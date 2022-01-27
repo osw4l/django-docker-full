@@ -1,0 +1,1 @@
+docker exec -ti django_osw4l_full python3 manage.py collectstatic --noinput
