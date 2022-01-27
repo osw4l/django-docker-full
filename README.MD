@@ -66,9 +66,10 @@ Go to main and then go to setup
 Now go to the detail
 
 I'll disabled the register for now
+
 ![enter image description here](https://i.imgur.com/WQo5C4v.png)
 
-**Then if i try to register in the register endpoint this gonna be the result**
+**Then if I try to register in the register endpoint this gonna be the result**
 
 ![enter image description here](https://i.imgur.com/1H8Zxum.png)
 
