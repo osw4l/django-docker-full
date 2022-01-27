@@ -9,7 +9,7 @@ this project contains the next libraries
 
  -  Python 3.8.10 
  - [Django==3.2](https://docs.djangoproject.com/en/4.0/releases/3.2/)    
- - [django-admin-interface==0.18.5](https://github.com/fabiocaccamo/django-admin-interface)    
+ - [django-admin-interface](https://github.com/fabiocaccamo/django-admin-interface)    
  - [Channels](https://channels.readthedocs.io/en/stable/)    
  - [Celery](https://docs.celeryproject.org/en/stable/django/first-steps-with-django.html)    
  - [django-celery-beat](https://django-celery-beat.readthedocs.io/en/latest/)    
@@ -46,6 +46,7 @@ and more pretty stuff like
 - Production deploy steps [click here](https://gist.github.com/osw4l/cbfbfb3f7a7f42ab31fa5083b358f316)    
 
 **Django Rest Framework Swagger**
+
 the project contains its own auth backend with register, login and reset password
 
 ![enter image description here](https://i.imgur.com/n2o2Fqo.png)
