@@ -12,3 +12,4 @@ celerybeat.pid
 .env
 /app
 /setup/docker
+/static
