@@ -3,7 +3,7 @@
 
 ![enter image description here](https://i.imgur.com/rsEw4yc.png)
 
-It is a beautiful **Django** image simple to configure, run and deploy, it was made with a lot of love and dedication for all human beings who love simple things.
+It is a beautiful **Django** image simple to configure, run and deploy, it was made with a lot of love and dedicated for humans who love django and simple things.
 
 this project contains the next libraries
 
