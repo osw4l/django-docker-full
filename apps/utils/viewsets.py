@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from collections import OrderedDict
 from rest_framework import filters
 from rest_framework.response import Response
-from .permissions import IsCompanyUser, IsCompanyOwner
+from .permissions import IsAccount, IsCompanyOwner
 
 
 class CustomPagination(PageNumberPagination):
@@ -50,7 +50,7 @@ class PrivateModelViewSet(mixins.CreateModelMixin,
 class OwnerBaseViewSet(viewsets.GenericViewSet):
     permission_classes = [
         IsAuthenticated,
-        IsCompanyUser,
+        IsAccount,
         IsCompanyOwner
     ]
     lookup_field = 'uuid'
@@ -65,13 +65,6 @@ class OwnerBaseViewSet(viewsets.GenericViewSet):
             if hasattr(self, 'detail_serializer_class'):
                 return self.detail_serializer_class
         return super().get_serializer_class()
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(company=self.request.user.companyuser.company).order_by('-id')
-
-    def perform_create(self, serializer):
-        serializer.save(company=self.request.user.companyuser.company)
 
 
 class OwnerModelViewSet(mixins.CreateModelMixin,

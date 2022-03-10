@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .forms import CompanyUserAdminForm
-from .models import CompanyUser
+from .forms import AccountAdminForm
+from .models import Account
 
 
-@admin.register(CompanyUser)
-class CompanyUserAdmin(admin.ModelAdmin):
+@admin.register(Account)
+class AccountAdmin(admin.ModelAdmin):
     list_display = [
         'uuid',
         'username',
@@ -18,7 +18,7 @@ class CompanyUserAdmin(admin.ModelAdmin):
     list_display_links = [
         'uuid'
     ]
-    form = CompanyUserAdminForm
+    form = AccountAdminForm
     actions = [
         'enable',
         'disable',

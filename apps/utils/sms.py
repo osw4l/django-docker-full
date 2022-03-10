@@ -1,6 +1,6 @@
+import time
 from twilio.rest import Client
 from django.conf import settings
-import time
 from apps.main.models import Sms
 from apps.utils.shortcuts import get_object_or_none
 from apps.utils.redis import client as redis

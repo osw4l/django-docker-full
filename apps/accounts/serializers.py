@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
-from .models import CompanyUser
+from .models import Account
 from apps.utils.shortcuts import get_object_or_none
 from apps.utils.exceptions import EmailValidationError
 
@@ -37,7 +37,7 @@ class UserLoginSerializer(serializers.Serializer):
             raise serializers.ValidationError({
                 'error': 'Las credenciales no son válidas'
             })
-        if not hasattr(user, 'companyuser'):
+        if not hasattr(user, 'account'):
             raise serializers.ValidationError({
                 'error': 'No tiene permisos para entrar aquí'
             })
@@ -50,7 +50,7 @@ class UserLoginSerializer(serializers.Serializer):
         if token:
             token.delete()
         token, created = Token.objects.update_or_create(user=user)
-        user = CompanyUserSerializer(user.companyuser)
+        user = AccountSerializer(user.account)
         return user.data, token.key
 
 
@@ -58,7 +58,7 @@ class CheckEmailSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
     def validate(self, data):
-        if CompanyUser.objects.filter(email=data.get('email')):
+        if Account.objects.filter(email=data.get('email')):
             raise EmailValidationError()
         return data
 
@@ -69,9 +69,9 @@ class CheckEmailSerializer(serializers.Serializer):
         pass
 
 
-class CompanyUserSerializer(serializers.ModelSerializer):
+class AccountSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CompanyUser
+        model = Account
         fields = (
             'uuid',
             'username',
@@ -89,9 +89,9 @@ class CompanyUserSerializer(serializers.ModelSerializer):
         }
 
 
-class CompanyUserRegisterSerializer(CompanyUserSerializer):
-    class Meta(CompanyUserSerializer.Meta):
-        fields = CompanyUserSerializer.Meta.fields + ('raw_password',)
+class AccountRegisterSerializer(AccountSerializer):
+    class Meta(AccountSerializer.Meta):
+        fields = AccountSerializer.Meta.fields + ('raw_password',)
         extra_kwargs = {
             'raw_password': {
                 'write_only': True
