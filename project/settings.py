@@ -48,8 +48,10 @@ INSTALLED_APPS = [
     'django_extensions',
     'drf_yasg',
     'mapwidgets',
+    'leaflet',
+    'django_json_widget',
     # apps
-    'apps.auth2',
+    'apps.accounts',
     'apps.main',
     'apps.utils',
 ]

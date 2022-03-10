@@ -74,7 +74,7 @@ services:
       - ./setup/docker/postgres:/var/lib/postgresql/13/main
     env_file: .env
     ports:
-      - '6200:5432'
+      - '8500:5432'
     restart: on-failure
     networks:
       - db_network

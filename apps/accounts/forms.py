@@ -1,10 +1,10 @@
 from django import forms
-from .models import CompanyUser
+from .models import Account
 
 
-class CompanyUserAdminForm(forms.ModelForm):
+class AccountAdminForm(forms.ModelForm):
     class Meta:
-        model = CompanyUser
+        model = Account
         fields = (
             'username',
             'email',
