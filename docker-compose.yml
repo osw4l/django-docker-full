@@ -69,9 +69,9 @@ services:
     command: redis-server
 
   database:
-    image: kartoza/postgis:12.0
+    image: kartoza/postgis:13.0
     volumes:
-      - ./setup/docker/postgres:/var/lib/postgresql/12/main
+      - ./setup/docker/postgres:/var/lib/postgresql/13/main
     env_file: .env
     ports:
       - '6200:5432'
